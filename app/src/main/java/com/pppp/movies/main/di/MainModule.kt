@@ -4,7 +4,7 @@ import com.pppp.movies.apis.MovieService
 import com.pppp.movies.apis.MoviesApi
 import com.pppp.movies.main.model.MainModel
 import com.pppp.movies.main.model.MainModelRetrofit
-import com.pppp.movies.main.viewmodel.MainViewModel
+import com.pppp.movies.main.viewmodel.MainPresenter
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +19,7 @@ class MainModule {
     }
 
     @Provides
-    fun providesPresenter(model: MainModel) = MainViewModel(model, AndroidSchedulers.mainThread(), Schedulers.io())
+    fun providesPresenter(model: MainModel) = MainPresenter(model, AndroidSchedulers.mainThread(), Schedulers.io())
 
     @Provides
     fun providesModeel(api: MoviesApi): MainModel = MainModelRetrofit(api, API_KEY)

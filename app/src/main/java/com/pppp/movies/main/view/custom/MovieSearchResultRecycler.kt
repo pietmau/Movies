@@ -13,12 +13,8 @@ class MovieSearchResultRecycler @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
 
-    var data: List<Movie>
-        set(value) {
-            (adapter as MovieSearchResultAdapter).data = value
-            adapter.notifyDataSetChanged()//TODO remove!!!!!!!!!!
-        }
-        get() = emptyList()
+    private val movieSearchResultAdapter
+        get() = (adapter as MovieSearchResultAdapter)
 
     private val columnsNumber: Int
         get() = if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 5 else 3
@@ -27,4 +23,14 @@ class MovieSearchResultRecycler @JvmOverloads constructor(
         layoutManager = GridLayoutManager(context, columnsNumber)
         adapter = MovieSearchResultAdapter((context.applicationContext as App).applicationComponent.imageLoader())
     }
+
+    fun setData(value: List<Movie>) {
+        movieSearchResultAdapter.data = value
+        movieSearchResultAdapter.notifyDataSetChanged()
+    }
+
+    fun setCallback(callback: MovieSearchResultAdapter.Callback) {
+        movieSearchResultAdapter.callback = callback
+    }
+
 }
