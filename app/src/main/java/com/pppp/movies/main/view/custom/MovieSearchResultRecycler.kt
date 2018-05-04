@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import com.pppp.movies.apis.search.Movie
+import com.pppp.movies.application.App
 
 class MovieSearchResultRecycler @JvmOverloads constructor(
         context: Context,
@@ -24,6 +25,6 @@ class MovieSearchResultRecycler @JvmOverloads constructor(
 
     init {
         layoutManager = GridLayoutManager(context, columnsNumber)
-        adapter = MovieSearchResultAdapter()
+        adapter = MovieSearchResultAdapter((context.applicationContext as App).applicationComponent.imageLoader())
     }
 }

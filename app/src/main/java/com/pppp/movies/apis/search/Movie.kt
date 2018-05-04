@@ -24,7 +24,7 @@ data class Movie(
     private val popularity: Double = 0.toDouble(),
     @SerializedName("poster_path")
     @Expose
-    private val posterPath: String? = null,
+    val posterPath: String? = null,
     @SerializedName("original_language")
     @Expose
     private val originalLanguage: String? = null,
