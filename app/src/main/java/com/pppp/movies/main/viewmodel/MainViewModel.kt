@@ -1,4 +1,4 @@
-package com.pppp.movies.main.presenter
+package com.pppp.movies.main.viewmodel
 
 import com.pppp.movies.apis.search.MoviesSearchResult
 import com.pppp.movies.main.model.MainModel

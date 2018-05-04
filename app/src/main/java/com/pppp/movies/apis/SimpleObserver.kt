@@ -1,4 +1,4 @@
-package com.pppp.movies.apis.search
+package com.pppp.movies.apis
 
 import io.reactivex.observers.DisposableObserver
 

@@ -1,4 +1,4 @@
-package com.pppp.movies.main
+package com.pppp.movies.main.view
 
 import android.support.v7.widget.SearchView
 

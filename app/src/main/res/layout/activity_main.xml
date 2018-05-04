@@ -17,12 +17,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true" />
 
-        <android.support.v7.widget.RecyclerView
+        <com.pppp.movies.main.view.custom.MovieSearchResultRecycler
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_below="@+id/search"
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
+        </com.pppp.movies.main.view.custom.MovieSearchResultRecycler>
 
     </RelativeLayout>
 

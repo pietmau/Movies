@@ -1,6 +1,6 @@
 package com.pppp.movies.main.di
 
-import com.pppp.movies.main.MainActivity
+import com.pppp.movies.main.view.MainActivity
 import dagger.Subcomponent
 
 @MainActivityScope

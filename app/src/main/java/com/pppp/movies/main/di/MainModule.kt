@@ -4,7 +4,7 @@ import com.pppp.movies.apis.MovieService
 import com.pppp.movies.apis.MoviesApi
 import com.pppp.movies.main.model.MainModel
 import com.pppp.movies.main.model.MainModelRetrofit
-import com.pppp.movies.main.presenter.MainViewModel
+import com.pppp.movies.main.viewmodel.MainViewModel
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers

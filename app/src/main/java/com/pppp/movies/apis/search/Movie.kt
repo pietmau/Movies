@@ -3,7 +3,7 @@ package com.pppp.movies.apis.search
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class Movie(
     @SerializedName("vote_count")
     @Expose
     private val voteCount: Int = 0,

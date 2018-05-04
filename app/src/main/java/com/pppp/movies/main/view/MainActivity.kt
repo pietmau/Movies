@@ -1,11 +1,13 @@
-package com.pppp.movies.main
+package com.pppp.movies.main.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pppp.movies.R
+import com.pppp.movies.apis.SimpleObserver
+import com.pppp.movies.apis.search.MoviesSearchResult
 import com.pppp.movies.application.App
 import com.pppp.movies.main.di.MainModule
-import com.pppp.movies.main.presenter.MainViewModel
+import com.pppp.movies.main.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -30,6 +32,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.subscribe()
+        viewModel.subscribe(object : SimpleObserver<MoviesSearchResult>() {
+            override fun onNext(result: MoviesSearchResult) {
+                result.movies?.let { recycler.data = it }
+            }
+        })
     }
 }
