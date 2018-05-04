@@ -5,12 +5,12 @@ import android.support.v7.app.AppCompatActivity
 import com.pppp.movies.R
 import com.pppp.movies.application.App
 import com.pppp.movies.main.di.MainModule
-import com.pppp.movies.main.presenter.MainPresenter
+import com.pppp.movies.main.presenter.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    @Inject lateinit var presenter: MainPresenter
+    @Inject lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,8 +18,18 @@ class MainActivity : AppCompatActivity() {
         (application as App).applicationComponent.with(MainModule()).inject(this)
         search.setOnQueryTextListener(object : SimpleOnQueryTextListener() {
             override fun onQueryTextChange(newText: String?): Boolean {
-                return presenter.onQueryTextChange(newText)
+                return viewModel.onQueryTextChange(newText)
             }
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.unSubscribe()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.subscribe()
     }
 }

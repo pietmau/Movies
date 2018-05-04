@@ -1,9 +1,9 @@
-package com.pppp.movies.search
+package com.pppp.movies.apis.search
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Response(
+data class MoviesSearchResult(
     @SerializedName("page")
     @Expose
     private val page: Int = 0,
