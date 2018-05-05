@@ -2,6 +2,7 @@ package com.pppp.movies.apis
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.pppp.movies.BASE_URL
+import com.pppp.movies.apis.detail.MovieDetail
 import com.pppp.movies.apis.search.MoviesSearchResult
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -22,4 +23,6 @@ object MovieService : MoviesApi {
     }
 
     override fun search(@QueryMap params: Map<String, String>): Observable<MoviesSearchResult> = service.search(params)
+
+    override fun getDetail(id: Int, params: Map<String, String>): Observable<MovieDetail> = service.getDetail(id, params)
 }

@@ -8,7 +8,7 @@ import com.pppp.movies.apis.SimpleObserver
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.apis.search.MoviesSearchResult
 import com.pppp.movies.application.App
-import com.pppp.movies.detail.DetailActivity
+import com.pppp.movies.detail.view.DetailActivity
 import com.pppp.movies.main.di.MainModule
 import com.pppp.movies.main.viewmodel.MainPresenter
 import com.pppp.movies.main.viewmodel.MainView
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        (application as App).applicationComponent.with(MainModule()).inject(this)
+        (application as App).applicationComponent.with(MainModule(this)).inject(this)
         search.setOnQueryTextListener(object : SimpleOnQueryTextListener() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 return viewModel.onQueryTextChange(newText)
@@ -41,12 +41,12 @@ class MainActivity : AppCompatActivity(), MainView {
             override fun onNext(result: MoviesSearchResult) {
                 result.movies?.let { recycler.setData(it) }
             }
-        })
+        }, this)
     }
 
     override fun startDetailScreen(movie: Movie) {
         val detailIntent = Intent(this, DetailActivity::class.java)
-        detailIntent.putExtra(DetailActivity.MOVIE_KEY, movie)
+        detailIntent.putExtra(DetailActivity.MOVIE_KEY_FROM_NETWORK, movie)
         startActivity(detailIntent)
     }
 }

@@ -1,5 +1,6 @@
 package com.pppp.movies.main.viewmodel
 
+import android.arch.lifecycle.ViewModel
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.apis.search.MoviesSearchResult
 import com.pppp.movies.main.model.MainModel
@@ -14,25 +15,25 @@ class MainPresenter(
         private val model: MainModel,
         private val mainThreadScheduler: Scheduler,
         private val workerThreadScheduler: Scheduler
-) : MovieSearchResultAdapter.Callback {
+) : ViewModel(), MovieSearchResultAdapter.Callback {
 
     private val subject: Subject<MoviesSearchResult> = BehaviorSubject.create()
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
-    lateinit var view: MainView
+    var view: MainView? = null
 
     fun onQueryTextChange(newText: String?): Boolean {
-        newText?.let {
-            compositeDisposable
-                    .add(model.search(it)
-                            .subscribeOn(workerThreadScheduler)
-                            .observeOn(mainThreadScheduler)
-                            .doOnNext { searchResult -> subject.onNext(searchResult) }
-                            .subscribe({}, {}))
-        }
+        newText ?: return true
+        compositeDisposable
+                .add(model.search(newText)
+                        .subscribeOn(workerThreadScheduler)
+                        .observeOn(mainThreadScheduler)
+                        .doOnNext { searchResult -> subject.onNext(searchResult) }//TODO review!!!!!!!!!!!!
+                        .subscribe({ }, {}))
         return true
     }
 
-    fun subscribe(observer: DisposableObserver<MoviesSearchResult>) {
+    fun subscribe(observer: DisposableObserver<MoviesSearchResult>, mainView: MainView) {
+        this.view = mainView
         compositeDisposable
                 .add(subject
                         .subscribeWith(observer))
@@ -40,10 +41,11 @@ class MainPresenter(
 
     fun unSubscribe() {
         compositeDisposable.dispose()
+        view = null
     }
 
     override fun onItemClicked(movie: Movie) {
-        view.startDetailScreen(movie)
+        view?.startDetailScreen(movie)
     }
 
 

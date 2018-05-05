@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.pppp.movies.main.view.custom.SquareImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/movie_title"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/favourite"
+            android:layout_width="@dimen/favoutite_size"
+            android:layout_height="@dimen/favoutite_size"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/image"
+            android:src="@drawable/ic_favorite_border_red_24dp" />
+
+        <TextView
+            android:id="@+id/overview"
+            android:lines="4"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movie_title" />
+
+    </RelativeLayout>
+
+</ScrollView>

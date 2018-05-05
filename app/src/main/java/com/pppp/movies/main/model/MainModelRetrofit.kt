@@ -1,5 +1,6 @@
 package com.pppp.movies.main.model
 
+import com.pppp.movies.API_KEY_KEY
 import com.pppp.movies.apis.MoviesApi
 import com.pppp.movies.apis.search.MoviesSearchResult
 import io.reactivex.Observable
@@ -8,7 +9,6 @@ class MainModelRetrofit(
         val api: MoviesApi,
         val apiKey: String) : MainModel {
     companion object {
-        private const val API_KEY_KEY = "api_key"
         private const val QUERY_KEY = "query"
     }
 
