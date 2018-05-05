@@ -20,7 +20,7 @@ data class Movie(
         private val voteAverage: Double = 0.0,
         @SerializedName("title")
         @Expose
-        private val title: String? = null,
+        val title: String? = null,
         @SerializedName("popularity")
         @Expose
         private val popularity: Double = 0.toDouble(),

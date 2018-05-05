@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.pppp.movies.main.view.custom.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <com.pppp.movies.main.view.custom.SquareImageView
-        android:scaleType="centerCrop"
+        android:background="@drawable/ic_logo"
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-         />
+        android:scaleType="centerCrop" />
 
-</com.pppp.movies.main.view.custom.SquareLayout>
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>
