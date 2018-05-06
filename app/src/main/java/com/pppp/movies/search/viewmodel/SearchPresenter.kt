@@ -3,25 +3,25 @@ package com.pppp.movies.search.viewmodel
 import android.arch.lifecycle.ViewModel
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.Relay
+import com.pppp.movies.apis.SimpleObserver
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.apis.search.MoviesSearchResult
 import com.pppp.movies.search.model.SearchModel
 import com.pppp.movies.search.view.custom.MovieSearchResultAdapter
-import io.reactivex.Observer
 import io.reactivex.Scheduler
-import io.reactivex.disposables.Disposable
 
 class SearchPresenter(
         private val model: SearchModel,
         private val mainThreadScheduler: Scheduler,
         private val workerThreadScheduler: Scheduler
-) : ViewModel(), MovieSearchResultAdapter.Callback, Observer<MoviesSearchResult> {
+) : ViewModel(), MovieSearchResultAdapter.Callback {
     private val subject: Relay<MoviesSearchResult> = BehaviorRelay.create<MoviesSearchResult>()
     var view: SearchView? = null
     var query: String? = null
+    private var disposable: SimpleObserver<MoviesSearchResult>? = null
 
     fun onQueryTextChange(newText: String?): Boolean {
-        if (newText == null || newText.isBlank() || newText.equals(query, true)) {
+        if (newText == null || !isAValidQuery(newText)) {
             return true
         }
         query = newText
@@ -35,31 +35,31 @@ class SearchPresenter(
 
     fun subscribe(searchView: SearchView) {
         this.view = searchView
-        subject.subscribe(this)
+        disposable = subject.subscribeWith(object : SimpleObserver<MoviesSearchResult>() {
+            override fun onError(throwable: Throwable) {
+                this@SearchPresenter.onError(throwable)
+            }
+
+            override fun onNext(moviesSearchResult: MoviesSearchResult) {
+                this@SearchPresenter.onMovieAvailable(moviesSearchResult)
+            }
+        })
+
     }
 
-    override fun onError(throwable: Throwable) {
+    fun onError(throwable: Throwable) {
         showProgress(false)
         view?.onError(throwable)
     }
 
-    // No need to unsubscribe from the model or the subject,
-    // because the only thing that will leak is the presenter itself,
-    // but we are preserving the presenter across config changes on purpose to avoid restarting the same
-    // queries
     fun unSubscribe() {
         view = null
+        disposable?.dispose()
     }
 
-    override fun onSubscribe(d: Disposable) {}
-
-    override fun onComplete() {
-
-    }
-
-    override fun onNext(t: MoviesSearchResult) {
+    fun onMovieAvailable(moviesSearchResult: MoviesSearchResult) {
         showProgress(false)
-        t.movies?.let { view?.onMovieAvailable(it) }
+        moviesSearchResult.movies?.let { view?.onMovieAvailable(it) }
     }
 
     override fun onItemClicked(movie: Movie) {
@@ -70,4 +70,5 @@ class SearchPresenter(
         view?.showProgress(show)
     }
 
+    private fun isAValidQuery(newText: String) = !newText.isBlank() && !newText.equals(query, true)
 }
