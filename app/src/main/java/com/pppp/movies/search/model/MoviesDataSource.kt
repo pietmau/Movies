@@ -26,12 +26,24 @@ class MoviesDataSource(
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Movie>) {
         val searchResult = model.searchSync(query)
         searchResult?.movies?.let {
-            val previous = Math.max(1, searchResult.page - 1).toString()
+            val previous = calculatePrevious(searchResult)
             callback.onResult(it, previous, calculateNextKey(searchResult))
         }
     }
 
-    private fun calculateNextKey(searchResult: MoviesSearchResult) = Math.min(searchResult.totalPages, searchResult.page + 1).toString()
+    private fun calculatePrevious(searchResult: MoviesSearchResult): String? {
+        if (searchResult.page <= 1) {
+            return null
+        }
+        return Math.max(1, searchResult.page - 1).toString()
+    }
+
+    private fun calculateNextKey(searchResult: MoviesSearchResult): String? {
+        if (searchResult.totalPages <= searchResult.page) {
+            return null
+        }
+        return Math.min(searchResult.totalPages, searchResult.page + 1).toString()
+    }
 
     private fun performQuery(params: LoadParams<String>) = model.searchSync(query, params.key)
 }
