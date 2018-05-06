@@ -53,7 +53,9 @@ class MainPresenter(
 
     override fun onSubscribe(d: Disposable) {}
 
-    override fun onComplete() {}
+    override fun onComplete() {
+
+    }
 
     override fun onNext(t: MoviesSearchResult) {
         showProgress(false)

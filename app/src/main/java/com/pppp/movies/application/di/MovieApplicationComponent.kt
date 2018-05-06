@@ -8,7 +8,7 @@ import com.pppp.movies.main.di.MainSubComponent
 import dagger.Component
 
 @Component(modules = arrayOf(ApplicationModule::class))
-interface ApplicationComponent {
+interface MovieApplicationComponent {
 
     fun imageLoader(): ImageLoader
 

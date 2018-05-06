@@ -3,13 +3,15 @@ package com.pppp.movies.application
 import android.app.Application
 import android.os.StrictMode
 import com.pppp.movies.BuildConfig
-import com.pppp.movies.application.di.ApplicationComponent
-import com.pppp.movies.application.di.DaggerApplicationComponent
+import com.pppp.movies.application.di.ApplicationModule
+import com.pppp.movies.application.di.DaggerMovieApplicationComponent
+import com.pppp.movies.application.di.MovieApplicationComponent
+
 import com.squareup.leakcanary.LeakCanary
 
 
 class App : Application() {
-    lateinit var applicationComponent: ApplicationComponent
+    lateinit var applicationComponent: MovieApplicationComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -18,7 +20,7 @@ class App : Application() {
             return;
         }
         LeakCanary.install(this);
-        applicationComponent = DaggerApplicationComponent.create()
+        applicationComponent = DaggerMovieApplicationComponent.builder().applicationModule(ApplicationModule(this.applicationContext)).build()
     }
 
     private fun setupStricktMode() {

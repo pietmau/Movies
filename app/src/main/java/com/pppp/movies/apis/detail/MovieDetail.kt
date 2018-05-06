@@ -1,10 +1,14 @@
 package com.pppp.movies.apis.detail
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class MovieDetail(
-        val isFavourite: Boolean = false,
+        var isFavourite: Boolean = false,
         @SerializedName("adult")
         @Expose
         var isAdult: Boolean = false,
@@ -12,17 +16,22 @@ data class MovieDetail(
         @Expose
         var backdropPath: String? = null,
         @SerializedName("belongs_to_collection")
+
+        @Ignore
         @Expose
         var belongsToCollection: Any? = null,
         @SerializedName("budget")
         @Expose
         var budget: Int = 0,
         @SerializedName("genres")
+
+        @Ignore
         @Expose
         var genres: List<Genre>? = null,
         @SerializedName("homepage")
         @Expose
         var homepage: String? = null,
+        @PrimaryKey
         @SerializedName("id")
         @Expose
         var id: Int = 0,
@@ -45,9 +54,13 @@ data class MovieDetail(
         @Expose
         var posterPath: String? = null,
         @SerializedName("production_companies")
+
+        @Ignore
         @Expose
         var productionCompanies: List<ProductionCompany>? = null,
         @SerializedName("production_countries")
+
+        @Ignore
         @Expose
         var productionCountries: List<ProductionCountry>? = null,
         @SerializedName("release_date")
@@ -60,6 +73,8 @@ data class MovieDetail(
         @Expose
         var runtime: Int = 0,
         @SerializedName("spoken_languages")
+
+        @Ignore
         @Expose
         var spokenLanguages: List<SpokenLanguage>? = null,
         @SerializedName("status")
