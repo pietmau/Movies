@@ -8,36 +8,24 @@ import com.pppp.movies.R
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.imageloader.ImageLoader
 
-class MovieSearchResultAdapter(private val loader: ImageLoader) : PagedListAdapter<Movie, MovieSearchResultHolder>(CALLBACK) {
+class MovieSearchResultAdapter(
+        private val loader: ImageLoader,
+        callback: DiffUtil.ItemCallback<Movie>)
+    : PagedListAdapter<Movie, MovieSearchResultHolder>(callback) {
+
     lateinit var callback: Callback
-    var data: List<Movie> = mutableListOf()
-    override fun getItemCount(): Int = data.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieSearchResultHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false)
-        return MovieSearchResultHolder(view, loader)
+        return MovieSearchResultHolder(LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false), loader)
     }
 
     override fun onBindViewHolder(holder: MovieSearchResultHolder, position: Int) {
-        val movie = data[position]
-        if (movie != null) {
-            holder.bind(movie, callback)
-        }else{
-            //holder.clear()
-        }
+        val movie = getItem(position)?.let { holder.bind(it, callback) }
     }
 
     interface Callback {
         fun onItemClicked(movie: Movie)
+
     }
 
-    object CALLBACK : DiffUtil.ItemCallback<Movie>() {
-        override fun areContentsTheSame(oldItem: Movie?, newItem: Movie?): Boolean {
-            return false
-        }
-
-        override fun areItemsTheSame(oldItem: Movie?, newItem: Movie?): Boolean {
-            return false
-        }
-    }
 }

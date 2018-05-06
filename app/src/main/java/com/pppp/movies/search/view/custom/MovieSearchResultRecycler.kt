@@ -1,5 +1,6 @@
 package com.pppp.movies.search.view.custom
 
+import android.arch.paging.PagedList
 import android.content.Context
 import android.content.res.Configuration
 import android.support.v7.widget.GridLayoutManager
@@ -21,16 +22,13 @@ class MovieSearchResultRecycler @JvmOverloads constructor(
 
     init {
         layoutManager = GridLayoutManager(context, columnsNumber)
-        adapter = MovieSearchResultAdapter((context.applicationContext as MoviesApp).applicationComponent.imageLoader())
-    }
-
-    fun setData(value: List<Movie>) {
-        movieSearchResultAdapter.data = value
-        movieSearchResultAdapter.notifyDataSetChanged()
+        adapter = MovieSearchResultAdapter((context.applicationContext as MoviesApp).applicationComponent.imageLoader(), DiffUtilItemCallback())
     }
 
     fun setCallback(callback: MovieSearchResultAdapter.Callback) {
         movieSearchResultAdapter.callback = callback
     }
+
+    fun submitData(movies: PagedList<Movie>) = movieSearchResultAdapter.submitList(movies)
 
 }

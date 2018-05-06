@@ -10,10 +10,10 @@ import retrofit2.http.QueryMap
 
 
 interface MoviesApi {
-    @GET("/3/searchAsync/movie")
+    @GET("/3/search/movie")
     fun search(@QueryMap params: Map<String, String>): Observable<MoviesSearchResult>
 
-    @GET("/3/searchAsync/movie")
+    @GET("/3/search/movie")
     fun searchSync(@QueryMap params: Map<String, String>): Call<MoviesSearchResult>
 
     @GET("/3/movie/{id}")

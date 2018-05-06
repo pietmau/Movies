@@ -8,9 +8,10 @@
 
 ##Features
 - Kotlin
-- Dagger, RxJava, Architecture components (ViewModel, Room)
+- Dagger, RxJava, Architecture components (ViewModel, Room, Paging)
 - Repository pattern implementation (DetailRepositoryRetrofit)
-- We use ViewModel to keep presenters across config changes so that we do not needlessly redo
+- **Api paging** implementation (using Architecture Components)
+- Use ViewModel to keep presenters across config changes so that we do not needlessly redo
 network requests.
 
  /$$$$$$$$ /$$$$$$$$  /$$$$$$  /$$$$$$$$ /$$$$$$  /$$
