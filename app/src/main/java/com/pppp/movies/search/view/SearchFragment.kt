@@ -9,29 +9,33 @@ import android.view.View
 import android.view.ViewGroup
 import com.pppp.movies.R
 import com.pppp.movies.apis.search.Movie
-import com.pppp.movies.application.App
+import com.pppp.movies.application.MoviesApp
 import com.pppp.movies.detail.view.DetailActivity
 import com.pppp.movies.isVisible
-import com.pppp.movies.search.di.MainModule
-import com.pppp.movies.search.viewmodel.MainPresenter
-import com.pppp.movies.search.viewmodel.MainView
+import com.pppp.movies.search.di.SearchModule
+import com.pppp.movies.search.viewmodel.SearchPresenter
+import com.pppp.movies.search.viewmodel.SearchView
 import com.pppp.movies.show
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
-class SearchFragment : Fragment(), MainView {
+class SearchFragment : Fragment(), SearchView {
     companion object {
         private const val PROGRESS_IS_SHOWING = "progress_is_showing"
+        val TAG = SearchFragment::class.simpleName
+        fun newInstance() = SearchFragment()
     }
-    @Inject lateinit var viewModel: MainPresenter
+
+    @Inject lateinit var viewModel: SearchPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        return view
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activity?.let { (it as App).applicationComponent.with(MainModule(it)).inject(this) }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let { (it.application as MoviesApp).applicationComponent.with(SearchModule(it)).inject(this) }
         search.setOnQueryTextListener(object : SimpleOnQueryTextListener() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 return viewModel.onQueryTextChange(newText)

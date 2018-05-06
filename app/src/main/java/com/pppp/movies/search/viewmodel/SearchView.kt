@@ -2,7 +2,7 @@ package com.pppp.movies.search.viewmodel
 
 import com.pppp.movies.apis.search.Movie
 
-interface MainView {
+interface SearchView {
     fun startDetailScreen(movie: Movie)
 
     fun onError(throwable: Throwable)

@@ -36,7 +36,7 @@
                 android:layout_width="@dimen/favoutite_size"
                 android:layout_height="@dimen/favoutite_size"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_favorite_border_red_24dp" />
+                android:src="@drawable/ic_favorite_border_24dp" />
 
         </RelativeLayout>
 

@@ -5,19 +5,19 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.Relay
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.apis.search.MoviesSearchResult
-import com.pppp.movies.search.model.MainModel
+import com.pppp.movies.search.model.SearchModel
 import com.pppp.movies.search.view.custom.MovieSearchResultAdapter
 import io.reactivex.Observer
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 
-class MainPresenter(
-        private val model: MainModel,
+class SearchPresenter(
+        private val model: SearchModel,
         private val mainThreadScheduler: Scheduler,
         private val workerThreadScheduler: Scheduler
 ) : ViewModel(), MovieSearchResultAdapter.Callback, Observer<MoviesSearchResult> {
     private val subject: Relay<MoviesSearchResult> = BehaviorRelay.create<MoviesSearchResult>()
-    var view: MainView? = null
+    var view: SearchView? = null
     var query: String? = null
 
     fun onQueryTextChange(newText: String?): Boolean {
@@ -33,8 +33,8 @@ class MainPresenter(
         return true
     }
 
-    fun subscribe(mainView: MainView) {
-        this.view = mainView
+    fun subscribe(searchView: SearchView) {
+        this.view = searchView
         subject.subscribe(this)
     }
 

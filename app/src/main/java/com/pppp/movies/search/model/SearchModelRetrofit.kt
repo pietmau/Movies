@@ -5,9 +5,9 @@ import com.pppp.movies.apis.MoviesApi
 import com.pppp.movies.apis.search.MoviesSearchResult
 import io.reactivex.Observable
 
-class MainModelRetrofit(
+class SearchModelRetrofit(
         val api: MoviesApi,
-        val apiKey: String) : MainModel {
+        val apiKey: String) : SearchModel {
     companion object {
         private const val QUERY_KEY = "query"
     }

@@ -10,7 +10,7 @@ import com.pppp.movies.application.di.MovieApplicationComponent
 import com.squareup.leakcanary.LeakCanary
 
 
-class App : Application() {
+class MoviesApp : Application() {
     lateinit var applicationComponent: MovieApplicationComponent
 
     override fun onCreate() {
