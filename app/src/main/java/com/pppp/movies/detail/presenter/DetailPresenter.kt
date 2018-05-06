@@ -4,12 +4,12 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.pppp.movies.apis.SimpleObserver
 import com.pppp.movies.apis.detail.MovieDetail
 import com.pppp.movies.apis.search.Movie
-import com.pppp.movies.detail.model.DetailModel
+import com.pppp.movies.detail.model.DetailRepository
 import com.pppp.movies.detail.view.DetailsView
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 
-class DetailPresenter(private val model: DetailModel,
+class DetailPresenter(private val repository: DetailRepository,
                       private val mainThreadScheduler: Scheduler,
                       private val workerThreadScheduler: Scheduler) {
     private val subject: BehaviorRelay<MovieDetail> = BehaviorRelay.create<MovieDetail>()
@@ -18,7 +18,7 @@ class DetailPresenter(private val model: DetailModel,
     private var detail: MovieDetail? = null
 
     fun getDetailsFromNet(movie: Movie) {
-        compositeDisposable.add(model.getMovieDetailFromNewtwork(movie.id)
+        compositeDisposable.add(repository.getMovieDetail(movie.id)
                 .subscribeOn(workerThreadScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(subject))
@@ -53,12 +53,12 @@ class DetailPresenter(private val model: DetailModel,
     fun onFavouritePressed() {
         detail?.let { detail ->
             detail.isFavourite = !detail.isFavourite
-            model.onFavouritePressed(detail)
+            repository.changeFavourite(detail)
         }
     }
 
     fun getDetailsFromDb(movie: Movie) {
-        compositeDisposable.add(model.getMovieDetailFromDb(movie.id)
+        compositeDisposable.add(repository.getMovieDetailFromDb(movie.id)
                 .subscribeOn(workerThreadScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(subject))
