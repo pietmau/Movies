@@ -12,6 +12,6 @@ class DetailModelRetrofit(
     override fun getMovieDetail(movie: Int): Observable<MovieDetail> {
         val map = HashMap<String, String>()
         map.put(API_KEY_KEY, apiKey)
-        return api.getDetail(movie, map)
+        return api.getDetail(movie, map).map { it }
     }
 }

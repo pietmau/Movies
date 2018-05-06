@@ -21,8 +21,8 @@ class DetailPresenter(private val model: DetailModel,
         compositeDisposable.add(model.getMovieDetail(movie.id)
                 .subscribeOn(workerThreadScheduler)
                 .observeOn(mainThreadScheduler)
-                .doOnNext { detail -> subject.onNext(detail) }//TODO fix in other and think about it
-                .doOnError { throwable -> subject.onError(throwable) }//TODO fix in other and think about it
+                .doOnNext { detail -> subject.onNext(detail) }
+                .doOnError { throwable -> subject.onError(throwable) }
                 .subscribe({}, {}))
     }
 
@@ -30,7 +30,7 @@ class DetailPresenter(private val model: DetailModel,
         this.view = view
         compositeDisposable.add(subject.subscribeWith(object : SimpleObserver<MovieDetail>() {
             override fun onError(throwable: Throwable) {
-                onError(throwable)
+                this@DetailPresenter.onError(throwable)
             }
 
             override fun onNext(detail: MovieDetail) {
@@ -49,6 +49,10 @@ class DetailPresenter(private val model: DetailModel,
 
     fun unSubscribe() {
         compositeDisposable.dispose()
+    }
+
+    fun onFavouritePressed() {
+        TODO()
     }
 
 

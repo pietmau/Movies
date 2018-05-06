@@ -50,6 +50,7 @@ class DetailActivity : AppCompatActivity(), DetailsView {
         overview.text = detail.overview
         favourite.setImageDrawable(getfavouriteDrawable(detail.isFavourite))
         loader.loadPoster(detail.posterPath, image)
+        favourite.setOnClickListener { presenter.onFavouritePressed() }
     }
 
     private fun getfavouriteDrawable(isFavourite: Boolean) =
