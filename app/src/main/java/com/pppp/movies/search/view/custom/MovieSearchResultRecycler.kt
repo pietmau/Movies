@@ -22,7 +22,8 @@ class MovieSearchResultRecycler @JvmOverloads constructor(
 
     init {
         layoutManager = GridLayoutManager(context, columnsNumber)
-        adapter = MovieSearchResultAdapter((context.applicationContext as MoviesApp).applicationComponent.imageLoader(), DiffUtilItemCallback())
+        val loader = (context.applicationContext as MoviesApp).applicationComponent.imageLoader()
+        adapter = MovieSearchResultAdapter(loader, DiffUtilItemCallback())
     }
 
     fun setCallback(callback: MovieSearchResultAdapter.Callback) {

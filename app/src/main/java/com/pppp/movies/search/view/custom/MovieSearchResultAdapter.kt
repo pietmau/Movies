@@ -11,21 +11,20 @@ import com.pppp.movies.imageloader.ImageLoader
 class MovieSearchResultAdapter(
         private val loader: ImageLoader,
         callback: DiffUtil.ItemCallback<Movie>)
-    : PagedListAdapter<Movie, MovieSearchResultHolder>(callback) {
+    : PagedListAdapter<Movie, MoviHolder>(callback) {
 
     lateinit var callback: Callback
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieSearchResultHolder {
-        return MovieSearchResultHolder(LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false), loader)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviHolder {
+        return MoviHolder(LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false), loader)
     }
 
-    override fun onBindViewHolder(holder: MovieSearchResultHolder, position: Int) {
+    override fun onBindViewHolder(holder: MoviHolder, position: Int) {
         val movie = getItem(position)?.let { holder.bind(it, callback) }
     }
 
     interface Callback {
         fun onItemClicked(movie: Movie)
-
     }
 
 }

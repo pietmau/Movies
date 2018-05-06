@@ -51,8 +51,7 @@ class FavouriteFragment : Fragment(), FavouriteView {
     }
 
     override fun onMoviesRetrieved(movies: List<Movie>) {
-        //recyler.submitData(movies)
-        TODO()
+        recyler.setMovies(movies)
     }
 
     override fun showDetaiScreen(movie: Movie) {

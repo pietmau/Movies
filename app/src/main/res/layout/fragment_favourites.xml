@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.pppp.movies.search.view.custom.MovieSearchResultRecycler
+    <com.pppp.movies.favourite.view.custom.FavoriteMoviesRecycler
         android:id="@+id/recyler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.pppp.movies.search.view.custom.MovieSearchResultRecycler>
+        android:layout_height="match_parent" />
 </LinearLayout>
