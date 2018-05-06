@@ -12,10 +12,17 @@ class SearchModelRetrofit(
         private const val QUERY_KEY = "query"
     }
 
-    override fun search(query: String): Observable<MoviesSearchResult> {
+    override fun searchAsync(query: String): Observable<MoviesSearchResult> {
         val map = HashMap<String, String>()
         map.put(API_KEY_KEY, apiKey)
         map.put(QUERY_KEY, query)
         return api.search(map)
+    }
+
+    override fun searchSync(query: String): MoviesSearchResult? {
+        val map = HashMap<String, String>()
+        map.put(API_KEY_KEY, apiKey)
+        map.put(QUERY_KEY, query)
+        return api.searchSync(map).execute().body()
     }
 }

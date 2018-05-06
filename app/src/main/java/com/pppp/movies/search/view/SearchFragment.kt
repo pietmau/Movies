@@ -1,5 +1,6 @@
 package com.pppp.movies.search.view
 
+import android.arch.paging.PagedList
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pppp.movies.R
+import com.pppp.movies.apis.SimpleObserver
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.application.MoviesApp
 import com.pppp.movies.detail.view.DetailActivity
@@ -16,6 +18,7 @@ import com.pppp.movies.search.di.SearchModule
 import com.pppp.movies.search.viewmodel.SearchPresenter
 import com.pppp.movies.search.viewmodel.SearchView
 import com.pppp.movies.show
+import io.reactivex.Flowable
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
@@ -53,7 +56,16 @@ class SearchFragment : Fragment(), SearchView {
 
     override fun onResume() {
         super.onResume()
-        viewModel.subscribe(this)
+        viewModel.subscribe(this, object : SimpleObserver<Flowable<PagedList<Movie>>>() {
+            override fun onNext(flowable: Flowable<PagedList<Movie>>) {
+                flowable.toObservable().subscribe(object : SimpleObserver<PagedList<Movie>>() {
+                    override fun onNext(t: PagedList<Movie>) {
+
+                    }
+                })
+            }
+        })
+        //viewModel.pagedItems?.
     }
 
     override fun startDetailScreen(movie: Movie) {//TODO exprenzlize in extensions

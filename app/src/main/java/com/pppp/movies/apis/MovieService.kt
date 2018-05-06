@@ -5,12 +5,15 @@ import com.pppp.movies.BASE_URL
 import com.pppp.movies.apis.detail.MovieDetail
 import com.pppp.movies.apis.search.MoviesSearchResult
 import io.reactivex.Observable
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.QueryMap
 
 
 object MovieService : MoviesApi {
+    override fun searchSync(params: Map<String, String>): Call<MoviesSearchResult> = service.searchSync(params)
+
     private val service: MoviesApi
 
     init {
