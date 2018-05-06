@@ -1,13 +1,13 @@
-package com.pppp.movies.main.view.custom
+package com.pppp.movies.search.view.custom
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.RelativeLayout
+import android.widget.ImageView
 
-class SquareLayout @JvmOverloads constructor(
+class SquareImageView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
-        defStyle: Int = 0) : RelativeLayout(context, attrs, defStyle) {
+        defStyle: Int = 0) : ImageView(context, attrs, defStyle) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)

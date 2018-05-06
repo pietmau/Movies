@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.pppp.movies.main.view.custom.SquareImageView
+    <com.pppp.movies.search.view.custom.SquareImageView
         android:background="@drawable/ic_logo"
         android:id="@+id/image"
         android:layout_width="match_parent"

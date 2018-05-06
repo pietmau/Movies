@@ -1,4 +1,4 @@
-package com.pppp.movies.main.view.custom
+package com.pppp.movies.search.view.custom
 
 import android.content.Context
 import android.content.res.Configuration

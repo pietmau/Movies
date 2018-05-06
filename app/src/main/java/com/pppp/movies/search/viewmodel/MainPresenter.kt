@@ -1,12 +1,12 @@
-package com.pppp.movies.main.viewmodel
+package com.pppp.movies.search.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.Relay
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.apis.search.MoviesSearchResult
-import com.pppp.movies.main.model.MainModel
-import com.pppp.movies.main.view.custom.MovieSearchResultAdapter
+import com.pppp.movies.search.model.MainModel
+import com.pppp.movies.search.view.custom.MovieSearchResultAdapter
 import io.reactivex.Observer
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable

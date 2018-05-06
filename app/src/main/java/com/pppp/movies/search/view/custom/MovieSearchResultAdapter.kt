@@ -1,4 +1,4 @@
-package com.pppp.movies.main.view.custom
+package com.pppp.movies.search.view.custom
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

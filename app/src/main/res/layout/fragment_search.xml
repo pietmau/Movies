@@ -17,14 +17,14 @@
             android:background="@android:color/white"
             android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <com.pppp.movies.main.view.custom.MovieSearchResultRecycler
+        <com.pppp.movies.search.view.custom.MovieSearchResultRecycler
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/search"
             android:layout_marginTop="@dimen/small_margin">
 
-        </com.pppp.movies.main.view.custom.MovieSearchResultRecycler>
+        </com.pppp.movies.search.view.custom.MovieSearchResultRecycler>
 
         <ProgressBar
             android:id="@+id/progress"

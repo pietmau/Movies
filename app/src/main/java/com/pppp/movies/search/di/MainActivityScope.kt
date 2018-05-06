@@ -1,4 +1,4 @@
-package com.pppp.movies.main.di
+package com.pppp.movies.search.di
 
 import javax.inject.Scope
 

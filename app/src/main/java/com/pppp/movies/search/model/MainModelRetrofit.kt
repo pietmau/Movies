@@ -1,4 +1,4 @@
-package com.pppp.movies.main.model
+package com.pppp.movies.search.model
 
 import com.pppp.movies.API_KEY_KEY
 import com.pppp.movies.apis.MoviesApi

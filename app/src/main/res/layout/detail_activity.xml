@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.pppp.movies.main.view.custom.SquareImageView
+        <com.pppp.movies.search.view.custom.SquareImageView
             android:scaleType="centerCrop"
             android:id="@+id/image"
             android:layout_width="match_parent"
