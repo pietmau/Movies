@@ -16,4 +16,8 @@ class MainPresenter {
     fun onSearchRequested() {
         view?.navigateToSearchScreen()
     }
+
+    fun ooFavouritesRequested() {
+        view?.navigateTofavourites()
+    }
 }

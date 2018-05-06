@@ -14,7 +14,7 @@ class DetailModelRetrofit(
         val schedulerIo: Scheduler,
         val mainThread: Scheduler) : DetailModel {
 
-    override fun getMovieDetail(id: Int): Observable<MovieDetail> {
+    override fun getMovieDetailFromNewtwork(id: Int): Observable<MovieDetail> {
         val map = HashMap<String, String>()
         map.put(API_KEY_KEY, apiKey)
         return api.getDetail(id, map)
@@ -27,6 +27,9 @@ class DetailModelRetrofit(
                 .map { dao.get(id).toObservable() }
                 .flatMap { it }
     }
+
+    override fun getMovieDetailFromDb(id: Int): Observable<MovieDetail> = dao.get(id).toObservable()
+
 
     override fun onFavouritePressed(movieDetail: MovieDetail) {
         Observable.fromCallable {

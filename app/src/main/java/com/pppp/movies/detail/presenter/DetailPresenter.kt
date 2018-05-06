@@ -18,7 +18,7 @@ class DetailPresenter(private val model: DetailModel,
     private var detail: MovieDetail? = null
 
     fun getDetailsFromNet(movie: Movie) {
-        compositeDisposable.add(model.getMovieDetail(movie.id)
+        compositeDisposable.add(model.getMovieDetailFromNewtwork(movie.id)
                 .subscribeOn(workerThreadScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(subject))
@@ -55,6 +55,13 @@ class DetailPresenter(private val model: DetailModel,
             detail.isFavourite = !detail.isFavourite
             model.onFavouritePressed(detail)
         }
+    }
+
+    fun getDetailsFromDb(movie: Movie) {
+        compositeDisposable.add(model.getMovieDetailFromDb(movie.id)
+                .subscribeOn(workerThreadScheduler)
+                .observeOn(mainThreadScheduler)
+                .subscribe(subject))
     }
 
 

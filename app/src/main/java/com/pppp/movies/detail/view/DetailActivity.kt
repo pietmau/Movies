@@ -28,8 +28,8 @@ class DetailActivity : AppCompatActivity(), DetailsView {
         setContentView(R.layout.detail_activity)
         (application as MoviesApp).applicationComponent.with(DetailModule()).inject(this)
         when {
-            (getMovie(MOVIE_KEY_FROM_NETWORK) != null) -> presenter.getDetailsFromNet(getMovie(MOVIE_KEY_FROM_NETWORK))
-            (getMovie(MOVIE_KEY_FROM_DB) != null) -> TODO()
+            (getMovie(MOVIE_KEY_FROM_NETWORK) != null) -> presenter.getDetailsFromNet(getMovie(MOVIE_KEY_FROM_NETWORK))//
+            (getMovie(MOVIE_KEY_FROM_DB) != null) -> presenter.getDetailsFromDb(getMovie(MOVIE_KEY_FROM_DB))//
         }
     }
 

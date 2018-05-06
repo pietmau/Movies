@@ -13,6 +13,9 @@ interface MovieDetailDao {
     @Query("SELECT * FROM moviedetail WHERE id = (:id)")
     fun get(id: Int): Flowable<MovieDetail>
 
+    @Query("SELECT * FROM moviedetail WHERE isFavourite = 1")
+    fun getAllFavourites(): Flowable<List<MovieDetail>>
+
     @Insert
     fun insert(movie: MovieDetail)
 

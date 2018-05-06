@@ -30,6 +30,7 @@ class SearchFragment : Fragment(), SearchView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
+        activity?.setTitle(getString(R.string.search))
         return view
     }
 

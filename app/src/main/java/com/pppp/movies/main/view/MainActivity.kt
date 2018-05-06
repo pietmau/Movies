@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.pppp.movies.R
 import com.pppp.movies.application.MoviesApp
+import com.pppp.movies.favourite.view.FavouriteFragment
 import com.pppp.movies.main.di.MainModule
 import com.pppp.movies.main.presenter.MainPresenter
 import com.pppp.movies.search.view.SearchFragment
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
         (applicationContext as MoviesApp).applicationComponent.with(MainModule()).inject(this)
-        savedInstanceState?:navigateToSearchScreen()
+        savedInstanceState ?: navigateToSearchScreen()
     }
 
     override fun onPause() {
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 presenter.onSearchRequested()
             }
             R.id.favourites -> {
-
+                presenter.ooFavouritesRequested()
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
@@ -67,5 +68,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportFragmentManager.beginTransaction().replace(R.id.container, frag, SearchFragment.TAG).commit()
     }
 
-
+    override fun navigateTofavourites() {
+        val frag = supportFragmentManager.findFragmentByTag(FavouriteFragment.TAG) ?: FavouriteFragment.newInstance()
+        supportFragmentManager.beginTransaction().replace(R.id.container, frag, FavouriteFragment.TAG).commit()
+    }
 }
