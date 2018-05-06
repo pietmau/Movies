@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.search_item.view.*
 class MovieSearchResultHolder(view: View, val loader: ImageLoader) : RecyclerView.ViewHolder(view) {
 
     fun bind(movie: Movie, callback: MovieSearchResultAdapter.Callback) {
-        loader.loadPoster(movie.posterPath, itemView.image, 100)
+        loader.loadPoster(movie.posterPath, itemView.image)
         itemView.title.text = movie.title
         itemView.setOnClickListener { callback.onItemClicked(movie) }
     }

@@ -49,6 +49,7 @@ class DetailActivity : AppCompatActivity(), DetailsView {
         movie_title.text = detail.title
         overview.text = detail.overview
         favourite.setImageDrawable(getfavouriteDrawable(detail.isFavourite))
+        loader.loadPoster(detail.posterPath, image)
     }
 
     private fun getfavouriteDrawable(isFavourite: Boolean) =

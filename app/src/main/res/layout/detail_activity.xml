@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
+    android:layout_margin="@dimen/small_margin"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,34 +10,43 @@
         android:layout_height="match_parent">
 
         <com.pppp.movies.main.view.custom.SquareImageView
+            android:scaleType="centerCrop"
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true" />
 
-        <TextView
-            android:id="@+id/movie_title"
-            style="@style/TextAppearance.AppCompat.Large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/title_container"
             android:layout_below="@+id/image"
-            android:layout_centerHorizontal="true" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/favoutite_size">
 
-        <ImageView
-            android:id="@+id/favourite"
-            android:layout_width="@dimen/favoutite_size"
-            android:layout_height="@dimen/favoutite_size"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/image"
-            android:src="@drawable/ic_favorite_border_red_24dp" />
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/movie_title"
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/favourite"
+                android:layout_width="@dimen/favoutite_size"
+                android:layout_height="@dimen/favoutite_size"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_favorite_border_red_24dp" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/overview"
-            android:lines="4"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/movie_title" />
+            android:layout_below="@+id/title_container"
+            android:lines="4" />
 
     </RelativeLayout>
 
