@@ -45,7 +45,7 @@ class FavouritePresenter(
         view?.onError(throwable)
     }
 
-    override fun onItemClicked(movie: Movie) {
+    override fun onMovieSelected(movie: Movie) {
         view?.showDetaiScreen(movie)
     }
 

@@ -13,7 +13,8 @@
 - **Api paging** implementation (using **Paging** Architecture Components)
 - Use ViewModel to keep presenters across config changes so that we do not needlessly redo
 network requests.
-- some unit tests (ideally the application should have been developed in TDD)
+- some unit tests using Mockito (ideally the application should have been developed in TDD)
+- enable mocking of Kotlin not open classes 
 
  /$$$$$$$$ /$$$$$$$$  /$$$$$$  /$$$$$$$$ /$$$$$$  /$$
 |__  $$__/| $$_____/ /$$__  $$|__  $$__//$$__  $$| $$

@@ -2,47 +2,37 @@ package com.pppp.movies.search.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
-import android.arch.paging.RxPagedListBuilder
-import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.Relay
 import com.pppp.movies.apis.SimpleObserver
 import com.pppp.movies.apis.search.Movie
-import com.pppp.movies.search.model.DataSourceFactory
-import com.pppp.movies.search.model.SearchModel
 import com.pppp.movies.search.view.custom.MovieSearchResultAdapter
-import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class SearchPresenter(
-        private val model: SearchModel,
-        private val mainThreadScheduler: Scheduler,//TODO
-        private val workerThreadScheduler: Scheduler
+        private val subject: Relay<PagedList<Movie>>,
+        private val pagedListFactory: PagedListFactory
+
 ) : ViewModel(), MovieSearchResultAdapter.Callback {
-    private val subject: Relay<PagedList<Movie>> = BehaviorRelay.create<PagedList<Movie>>()
-    var view: SearchView? = null
-    var query: String? = null
+
+    private var view: SearchView? = null
+    private var currentQuery: String? = null
     private var disposable: Disposable? = null
+    private var pagedItemsFlowable: Flowable<PagedList<Movie>>? = pagedListFactory.getPagesList()
 
-    var pagedItems: Flowable<PagedList<Movie>>? = RxPagedListBuilder(DataSourceFactory(model, ""), 20)
-            .setFetchScheduler(Schedulers.io())
-            .buildFlowable(BackpressureStrategy.LATEST)
-
-    fun onQueryTextChange(newText: String?): Boolean {
-        if (newText == null || !isAValidQuery(newText)) {
+    fun onQueryTextChange(newQuery: String?): Boolean {
+        if (newQuery == null || !isAValidQuery(newQuery)) {
             return true
         }
-        query = newText
-        pagedItems = RxPagedListBuilder(DataSourceFactory(model, newText), 20)
-                .setFetchScheduler(Schedulers.io())
-                .buildFlowable(BackpressureStrategy.LATEST)
-        Observable.just(pagedItems)
-                .flatMap { it.toObservable() }
-                .subscribe(subject)
         showProgress(true)
+        currentQuery = newQuery
+        pagedItemsFlowable = pagedListFactory.getPagesList(newQuery)
+        Observable.just(pagedItemsFlowable)
+                .flatMap { it.toObservable() }
+                .doOnError { error -> this@SearchPresenter.onError(error) }
+                .onErrorResumeNext(Observable.empty())
+                .subscribe(subject)
         return true
     }
 
@@ -74,7 +64,7 @@ class SearchPresenter(
         disposable?.dispose()
     }
 
-    override fun onItemClicked(movie: Movie) {
+    override fun onMovieSelected(movie: Movie) {
         view?.startDetailScreen(movie)
     }
 
@@ -82,5 +72,5 @@ class SearchPresenter(
         view?.showProgress(show)
     }
 
-    private fun isAValidQuery(newText: String) = !newText.isBlank() && !newText.equals(query, true)
+    private fun isAValidQuery(newText: String) = !newText.isBlank() && !newText.equals(currentQuery, true)
 }

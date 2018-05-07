@@ -3,22 +3,24 @@ package com.pppp.movies.search.di
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.arch.paging.PagedList
 import android.support.v4.app.FragmentActivity
+import com.jakewharton.rxrelay2.BehaviorRelay
 import com.pppp.movies.apis.MoviesApi
+import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.search.model.SearchModel
 import com.pppp.movies.search.model.SearchModelRetrofit
+import com.pppp.movies.search.viewmodel.PagedListFactory
 import com.pppp.movies.search.viewmodel.SearchPresenter
 import dagger.Module
 import dagger.Provides
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 @SearchScope
 @Module
 class SearchModule(val activity: FragmentActivity) {
 
     companion object {
-        private const val API_KEY = "4cb1eeab94f45affe2536f2c684a5c9e"
+        private const val API_KEY = "4cb1eeab94f45affe2536f2c684a5c9e"// TODO externalize in build system
     }
 
     @SearchScope
@@ -30,12 +32,15 @@ class SearchModule(val activity: FragmentActivity) {
     fun providesModel(api: MoviesApi): SearchModel = SearchModelRetrofit(api, API_KEY)
 
     @Provides
-    fun providesFactory(model: SearchModel): MainPresenterFactory = MainPresenterFactory(model)
+    fun providesFactory(pagedListFactory: PagedListFactory): MainPresenterFactory = MainPresenterFactory(pagedListFactory)
 
-    class MainPresenterFactory(val model: SearchModel) : ViewModelProvider.Factory {
+    @Provides
+    fun providesPagedListFactory(model: SearchModel) = PagedListFactory(model)
+
+    class MainPresenterFactory(val pagedListFactory: PagedListFactory) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return SearchPresenter(model, AndroidSchedulers.mainThread(), Schedulers.io()) as T
+            return SearchPresenter(BehaviorRelay.create<PagedList<Movie>>(), pagedListFactory) as T
         }
     }
 }

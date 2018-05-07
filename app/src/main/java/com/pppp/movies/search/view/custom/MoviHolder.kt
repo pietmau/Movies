@@ -11,7 +11,7 @@ class MoviHolder(view: View, val loader: ImageLoader) : RecyclerView.ViewHolder(
     fun bind(movie: Movie, callback: MovieSearchResultAdapter.Callback) {
         loader.loadPoster(movie.posterPath, itemView.image)
         itemView.title.text = movie.title
-        itemView.setOnClickListener { callback.onItemClicked(movie) }
+        itemView.setOnClickListener { callback.onMovieSelected(movie) }
     }
 
 }

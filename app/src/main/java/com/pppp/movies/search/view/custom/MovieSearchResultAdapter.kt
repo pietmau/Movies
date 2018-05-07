@@ -24,7 +24,7 @@ class MovieSearchResultAdapter(
     }
 
     interface Callback {
-        fun onItemClicked(movie: Movie)
+        fun onMovieSelected(movie: Movie)
     }
 
 }
