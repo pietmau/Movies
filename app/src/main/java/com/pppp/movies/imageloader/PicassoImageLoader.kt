@@ -14,6 +14,7 @@ class PicassoImageLoader(val picasso: Picasso, val baseUrl: String) : ImageLoade
     }
 
     override fun loadPoster(posterPath: String?, view: ImageView) {
-        posterPath?.let { picasso.load(baseUrl + "/t/p/original" + it).into(view) } // Image size not supported!!!
+        // Image size not supported by the movie db api
+        posterPath?.let { picasso.load(baseUrl + "/t/p/original" + it).into(view) }
     }
 }

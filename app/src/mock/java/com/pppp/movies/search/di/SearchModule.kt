@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.arch.paging.PagedList
 import android.support.v4.app.FragmentActivity
 import com.jakewharton.rxrelay2.BehaviorRelay
+import com.pppp.movies.API_KEY
 import com.pppp.movies.apis.MoviesApi
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.search.model.SearchModel
@@ -18,10 +19,6 @@ import dagger.Provides
 @SearchScope
 @Module
 class SearchModule(val activity: FragmentActivity) {
-
-    companion object {
-        private const val API_KEY = "4cb1eeab94f45affe2536f2c684a5c9e"// TODO externalize in build system
-    }
 
     @SearchScope
     @Provides

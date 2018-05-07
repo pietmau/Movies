@@ -12,7 +12,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun movieDetailDao(): MovieDetailDao
 
     companion object {
-        private var db: AppDatabase? = null//TODO
+        private var db: AppDatabase? = null
 
         fun getDb(context: Context): AppDatabase {
             if (db == null) {

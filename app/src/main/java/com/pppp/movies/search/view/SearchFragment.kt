@@ -27,7 +27,7 @@ class SearchFragment : Fragment(), SearchView {
         fun newInstance() = SearchFragment()
     }
 
-    @Inject lateinit var viewModel: SearchPresenter
+    @Inject lateinit var presenter: SearchPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
@@ -40,24 +40,24 @@ class SearchFragment : Fragment(), SearchView {
         activity?.let { (it.application as MoviesApp).applicationComponent.with(SearchModule(it)).inject(this) }
         search.setOnQueryTextListener(object : SimpleOnQueryTextListener() {
             override fun onQueryTextChange(newText: String?): Boolean {
-                return viewModel.onQueryTextChange(newText)
+                return presenter.onQueryTextChange(newText)
             }
         })
-        recycler.setCallback(viewModel)
+        recycler.setCallback(presenter)
         restoreState(savedInstanceState)
     }
 
     override fun onPause() {
         super.onPause()
-        viewModel.unSubscribe()
+        presenter.unSubscribe()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.subscribe(this)
+        presenter.subscribe(this)
     }
 
-    override fun startDetailScreen(movie: Movie) {//TODO exprenzlize in extensions
+    override fun startDetailScreen(movie: Movie) {
         activity?.let {
             val detailIntent = Intent(it, DetailActivity::class.java)
             detailIntent.putExtra(DetailActivity.MOVIE_KEY_FROM_NETWORK, movie)

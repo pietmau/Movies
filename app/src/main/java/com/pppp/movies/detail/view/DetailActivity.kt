@@ -8,7 +8,6 @@ import com.pppp.movies.apis.detail.MovieDetail
 import com.pppp.movies.application.MoviesApp
 import com.pppp.movies.detail.di.DetailModule
 import com.pppp.movies.detail.presenter.DetailPresenter
-import com.pppp.movies.findDrawable
 import com.pppp.movies.getMovie
 import com.pppp.movies.imageloader.ImageLoader
 import kotlinx.android.synthetic.main.detail_activity.*
@@ -48,14 +47,10 @@ class DetailActivity : AppCompatActivity(), DetailsView {
     override fun onDetailsAvailable(detail: MovieDetail) {
         movie_title.text = detail.title
         overview.text = detail.overview
-        favourite.setImageDrawable(getfavouriteDrawable(detail.isFavourite))
+        favourite.setImageResource(if (detail.isFavourite) (R.drawable.ic_favorite_filled_24dp) else (R.drawable.ic_favorite_border_24dp))
         loader.loadPoster(detail.posterPath, image)
         favourite.setOnClickListener { presenter.onFavouritePressed() }
     }
-
-    private fun getfavouriteDrawable(isFavourite: Boolean) =
-            if (isFavourite) findDrawable(R.drawable.ic_favorite_filled_24dp) else findDrawable(R.drawable.ic_favorite_border_24dp)
-
 
 }
 

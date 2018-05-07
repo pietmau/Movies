@@ -11,7 +11,7 @@ import com.pppp.movies.R
 import com.pppp.movies.apis.search.Movie
 import com.pppp.movies.application.MoviesApp
 import com.pppp.movies.imageloader.ImageLoader
-import com.pppp.movies.search.view.custom.MoviHolder
+import com.pppp.movies.search.view.custom.MovieHolder
 import com.pppp.movies.search.view.custom.MovieSearchResultAdapter
 
 class FavoriteMoviesRecycler @JvmOverloads constructor(
@@ -40,18 +40,18 @@ class FavoriteMoviesRecycler @JvmOverloads constructor(
     }
 
 
-    class FavoriteMoviesAdapter(private val loader: ImageLoader) : RecyclerView.Adapter<MoviHolder>() {
+    class FavoriteMoviesAdapter(private val loader: ImageLoader) : RecyclerView.Adapter<MovieHolder>() {
         private val data = mutableListOf<Movie>()
 
         override fun getItemCount(): Int = data.size
 
         lateinit var callback: MovieSearchResultAdapter.Callback
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviHolder {
-            return MoviHolder(LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false), loader)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
+            return MovieHolder(LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false), loader)
         }
 
-        override fun onBindViewHolder(holder: MoviHolder, position: Int) {
+        override fun onBindViewHolder(holder: MovieHolder, position: Int) {
             data[position]?.let { holder.bind(it, callback) }
         }
 

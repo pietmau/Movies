@@ -9,6 +9,7 @@
 /captures
 .externalNativeBuild
 .idea/misc.xml
+app/production
 
 # Built application files
 *.apk

@@ -17,6 +17,6 @@ class FavouriteModule {
     fun providePresenter(model: FavouriteModel) = FavouritePresenter(model, Schedulers.io(), AndroidSchedulers.mainThread())
 
     @Provides
-    fun provideModel(dao: MovieDetailDao): FavouriteModel = RoomFavouriteModel(dao, MovieMapperImpl())//TODO Rename other model as well
+    fun provideModel(dao: MovieDetailDao): FavouriteModel = RoomFavouriteModel(dao, MovieMapperImpl())
 
 }

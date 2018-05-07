@@ -24,7 +24,7 @@ class DetailPresenter(private val repository: DetailRepository,
                 .subscribe(subject))
     }
 
-    fun subscribe(view: DetailsView) {//TODO do the same for main view
+    fun subscribe(view: DetailsView) {
         this.view = view
         compositeDisposable.add(subject.subscribeWith(object : SimpleObserver<MovieDetail>() {
             override fun onError(throwable: Throwable) {

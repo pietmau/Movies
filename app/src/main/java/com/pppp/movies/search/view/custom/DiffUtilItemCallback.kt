@@ -16,6 +16,6 @@ class DiffUtilItemCallback : DiffUtil.ItemCallback<Movie>() {
         if (oldItem == null || newItem == null) {
             return false
         }
-        return oldItem.id == newItem.id
+        return oldItem.equals(newItem)
     }
 }
