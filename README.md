@@ -4,9 +4,7 @@ Use production product flavor **production** for running, and **mock** for Espre
 ##TODO
 - Externalize api key
 - Apparently the MovieDatabase API does not support image size :-(
-- Animate favourite
-- Could have used data binding, but didn't
-- Could have used constraint layout, but didn't
+- Write UI tests 
 
 ##Features
 - Kotlin
@@ -17,15 +15,3 @@ Use production product flavor **production** for running, and **mock** for Espre
 network requests.
 - some unit tests using Mockito (ideally the application should have been developed in TDD)
 - enable mocking of Kotlin not open classes 
-
- /$$$$$$$$ /$$$$$$$$  /$$$$$$  /$$$$$$$$ /$$$$$$  /$$
-|__  $$__/| $$_____/ /$$__  $$|__  $$__//$$__  $$| $$
-   | $$   | $$      | $$  \__/   | $$  | $$  \__/| $$
-   | $$   | $$$$$   |  $$$$$$    | $$  |  $$$$$$ | $$
-   | $$   | $$__/    \____  $$   | $$   \____  $$|__/
-   | $$   | $$       /$$  \ $$   | $$   /$$  \ $$    
-   | $$   | $$$$$$$$|  $$$$$$/   | $$  |  $$$$$$/ /$$
-   |__/   |________/ \______/    |__/   \______/ |__/
-                                                     
-                                                     
-                                                     
