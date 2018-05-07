@@ -20,6 +20,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "unused"
+
+    productFlavors {
+        production {
+            dimension "unused"
+        }
+        mock{
+            dimension "unused"
+        }
+    }
 }
 
 dependencies {
@@ -43,7 +53,8 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'//TODO no op implementation for release builds
+    implementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+//TODO no op implementation for release builds
 
     kapt 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
@@ -62,4 +73,5 @@ dependencies {
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 }

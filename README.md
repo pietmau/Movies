@@ -1,3 +1,5 @@
+# ATTENTION PLEASE
+Use production product flavor **production** for running, and **mock** for Espresso tests  
 
 ##TODO
 - Externalize api key
